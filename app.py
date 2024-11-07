@@ -1,11 +1,32 @@
-import numpy as np
+import os
+import gdown
 from flask import Flask, request, jsonify, render_template
 import pickle
 import pandas as pd
 
 # Create flask app
 flask_app = Flask(__name__)
-model = pickle.load(open("model.pkl", "rb"))
+
+# Check if the model file is already downloaded
+if not os.path.exists('model.pkl'):
+    # Replace FILE_ID with your actual file ID from Google Drive
+    url = 'https://drive.google.com/uc?export=download&id=1PyuomXpz5qYGUnexPF7p-smnlDuHjMkr'
+    output = 'model.pkl'
+    gdown.download(url, output, quiet=False)
+
+# Load the model
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+
+# import numpy as np
+# from flask import Flask, request, jsonify, render_template
+# import pickle
+# import pandas as pd
+
+# # Create flask app
+# flask_app = Flask(__name__)
+# model = pickle.load(open("model.pkl", "rb"))
 
 # Load the columns that were used to train the model (make sure you have saved them)
 model_columns = pickle.load(open("model_columns.pkl", "rb")) 
