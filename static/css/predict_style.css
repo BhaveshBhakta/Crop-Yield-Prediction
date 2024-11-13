@@ -1,0 +1,143 @@
+.inter-uniquifier {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight; 
+    font-style: normal;
+}
+  
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html,body{
+    width: 100%;
+    height: 100%;
+}
+  
+body{
+    background-color: #072312;
+    min-height: 100mvh;
+    overflow-x: hidden;
+}
+
+#main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#main h1{
+    margin-top: 3vh;
+    font-size: 3vw;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+#box{
+    margin-top: 3vh;
+    height: 75vh;
+    width: 35vw;
+    background-color: white;
+}
+
+
+#main img{
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 10%;
+    object-fit: fill;
+}
+
+
+input {
+    border: none;
+    border-bottom: 2px solid #757575ce;
+    outline: none; 
+    padding: 5px 0; 
+}
+
+.form-group label {
+    font-size: 3vh;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+}
+
+.form-group {
+    padding-top: 1.2vh;
+    padding-left: 3vh;
+    padding-right: 10vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; 
+}
+
+input::placeholder {
+    font-size: 2vh;
+    color: #757575; 
+    opacity: 1; 
+}
+
+
+input:-moz-placeholder {
+    color: #757575; 
+    opacity: 1;
+}
+
+
+input::-ms-input-placeholder {
+    color: #757575; 
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#submit-box button {
+    margin-top: 1.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4vh 1.2vw; 
+    font-size: 1vw; 
+    border-radius: 1.5vw; 
+    border: none;
+    height: auto; 
+
+}
+
+#submit-box h1 {
+    font-size: 1.5vh;
+}
+
+
+.symbol {
+    margin-left: 0.5vw;
+    font-size: 2vw;
+    color:  #1B5624; 
+}
+
+#submit-box{
+    display: flex;
+}
+
+#submit-box h1{
+    margin-top: 2vh;
+    font-size: 2vh;
+    margin-left: 3vw;
+}

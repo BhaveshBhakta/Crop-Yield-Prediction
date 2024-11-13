@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Predict</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/predict_style.css') }}">
+</head>
+
+<body>
+    <div id="main">
+        <h1>Predict Your Crop Yield</h1>
+        <div id="box">
+            <form action="/predict" method="post">
+                <div class="form-group">
+                    <label for="State_Name">State Name</label>
+                    <input type="text" class="form-control" name="State_Name" step="any" list="state-options"
+                        placeholder="Enter state name " required
+                        value="{{ request.form['State_Name'] if request.form.get('State_Name') else '' }}">
+                    <datalist id="state-options">
+                        <option value="Andaman and Nicobar Islands">
+                        <option value="Andhra Pradesh">
+                        <option value="Arunachal Pradesh">
+                        <option value="Assam">
+                        <option value="Bihar">
+                        <option value="Chandigarh">
+                        <option value="Chhattisgarh">
+                        <option value="Dadra and Nagar Haveli">
+                        <option value="Goa">
+                        <option value="Gujarat">
+                        <option value="Haryana">
+                        <option value="Himachal Pradesh">
+                        <option value="Jammu and Kashmir">
+                        <option value="Jharkhand">
+                        <option value="Karnataka">
+                        <option value="Kerala">
+                        <option value="Madhya Pradesh">
+                        <option value="Maharashtra">
+                        <option value="Manipur">
+                        <option value="Meghalaya">
+                        <option value="Mizoram">
+                        <option value="Nagaland">
+                        <option value="Odisha">
+                        <option value="Puducherry">
+                        <option value="Punjab">
+                        <option value="Rajasthan">
+                        <option value="Sikkim">
+                        <option value="Tamil Nadu">
+                        <option value="Telangana">
+                        <option value="Tripura">
+                        <option value="Uttar Pradesh">
+                        <option value="Uttarakhand">
+                        <option value="West Bengal">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="District_Name">District Name</label>
+                    <input type="text" class="form-control" name="District_Name" step="any" list="district-options"
+                        placeholder="Enter district name" required
+                        value="{{ request.form['District_Name'] if request.form.get('District_Name') else '' }}">
+                    <datalist id="district-options">
+                        <option value="NICOBARS">
+                        <option value="NORTH AND MIDDLE ANDAMAN">
+                        <option value="SOUTH ANDAMANS">
+                        <option value="ANANTAPUR">
+                        <option value="CHITTOOR">
+                        <option value="EAST GODAVARI">
+                        <option value="GUNTUR">
+                        <option value="KADAPA">
+                        <option value="KRISHNA">
+                        <option value="KURNOOL">
+                        <option value="PRAKASAM">
+                        <option value="SPSR NELLORE">
+                        <option value="SRIKAKULAM">
+                        <option value="VISAKHAPATANAM">
+                        <option value="VIZIANAGARAM">
+                        <option value="WEST GODAVARI">
+                        <option value="ANJAW">
+                        <option value="CHANGLANG">
+                        <option value="DIBANG VALLEY">
+                        <option value="EAST KAMENG">
+                        <option value="EAST SIANG">
+                        <option value="KURUNG KUMEY">
+                        <option value="LOHIT">
+                        <option value="LONGDING">
+                        <option value="LOWER DIBANG VALLEY">
+                        <option value="LOWER SUBANSIRI">
+                        <option value="NAMSAI">
+                        <option value="PAPUM PARE">
+                        <option value="TAWANG">
+                        <option value="TIRAP">
+                        <option value="UPPER SIANG">
+                        <option value="UPPER SUBANSIRI">
+                        <option value="WEST KAMENG">
+                        <option value="WEST SIANG">
+                        <option value="BAKSA">
+                        <option value="BARPETA">
+                        <option value="BONGAIGAON">
+                        <option value="CACHAR">
+                        <option value="CHIRANG">
+                        <option value="DARRANG">
+                        <option value="DHEMAJI">
+                        <option value="DHUBRI">
+                        <option value="DIBRUGARH">
+                        <option value="DIMA HASAO">
+                        <option value="GOALPARA">
+                        <option value="GOLAGHAT">
+                        <option value="HAILAKANDI">
+                        <option value="JORHAT">
+                        <option value="KAMRUP">
+                        <option value="KAMRUP METRO">
+                        <option value="KARBI ANGLONG">
+                        <option value="KARIMGANJ">
+                        <option value="KOKRAJHAR">
+                        <option value="LAKHIMPUR">
+                        <option value="MARIGAON">
+                        <option value="NAGAON">
+                        <option value="NALBARI">
+                        <option value="SIVASAGAR">
+                        <option value="SONITPUR">
+                        <option value="TINSUKIA">
+                        <option value="UDALGURI">
+                        <option value="ARARIA">
+                        <option value="ARWAL">
+                        <option value="AURANGABAD">
+                        <option value="BANKA">
+                        <option value="BEGUSARAI">
+                        <option value="BHAGALPUR">
+                        <option value="BHOJPUR">
+                        <option value="BUXAR">
+                        <option value="DARBHANGA">
+                        <option value="GAYA">
+                        <option value="GOPALGANJ">
+                        <option value="JAMUI">
+                        <option value="JEHANABAD">
+                        <option value="KAIMUR (BHABUA)">
+                        <option value="KATIHAR">
+                        <option value="KHAGARIA">
+                        <option value="KISHANGANJ">
+                        <option value="LAKHISARAI">
+                        <option value="MADHEPURA">
+                        <option value="MADHUBANI">
+                        <option value="MUNGER">
+                        <option value="MUZAFFARPUR">
+                        <option value="NALANDA">
+                        <option value="NAWADA">
+                        <option value="PASHCHIM CHAMPARAN">
+                        <option value="PATNA">
+                        <option value="PURBI CHAMPARAN">
+                        <option value="PURNIA">
+                        <option value="ROHTAS">
+                        <option value="SAHARSA">
+                        <option value="SAMASTIPUR">
+                        <option value="SARAN">
+                        <option value="SHEIKHPURA">
+                        <option value="SHEOHAR">
+                        <option value="SITAMARHI">
+                        <option value="SIWAN">
+                        <option value="SUPAUL">
+                        <option value="VAISHALI">
+                        <option value="CHANDIGARH">
+                        <option value="BALOD">
+                        <option value="BALODA BAZAR">
+                        <option value="BALRAMPUR">
+                        <option value="BASTAR">
+                        <option value="BEMETARA">
+                        <option value="BIJAPUR">
+                        <option value="BILASPUR">
+                        <option value="DANTEWADA">
+                        <option value="DHAMTARI">
+                        <option value="DURG">
+                        <option value="GARIYABAND">
+                        <option value="JANJGIR-CHAMPA">
+                        <option value="JASHPUR">
+                        <option value="KABIRDHAM">
+                        <option value="KANKER">
+                        <option value="KONDAGAON">
+                        <option value="KORBA">
+                        <option value="KOREA">
+                        <option value="MAHASAMUND">
+                        <option value="MUNGELI">
+                        <option value="NARAYANPUR">
+                        <option value="RAIGARH">
+                        <option value="RAIPUR">
+                        <option value="RAJNANDGAON">
+                        <option value="SUKMA">
+                        <option value="SURAJPUR">
+                        <option value="SURGUJA">
+                        <option value="DADRA AND NAGAR HAVELI">
+                        <option value="NORTH GOA">
+                        <option value="SOUTH GOA">
+                        <option value="AHMADABAD">
+                        <option value="AMRELI">
+                        <option value="ANAND">
+                        <option value="BANAS KANTHA">
+                        <option value="BHARUCH">
+                        <option value="BHAVNAGAR">
+                        <option value="DANG">
+                        <option value="DOHAD">
+                        <option value="GANDHINAGAR">
+                        <option value="JAMNAGAR">
+                        <option value="JUNAGADH">
+                        <option value="KACHCHH">
+                        <option value="KHEDA">
+                        <option value="MAHESANA">
+                        <option value="NARMADA">
+                        <option value="NAVSARI">
+                        <option value="PANCH MAHALS">
+                        <option value="PATAN">
+                        <option value="PORBANDAR">
+                        <option value="RAJKOT">
+                        <option value="SABAR KANTHA">
+                        <option value="SURAT">
+                        <option value="SURENDRANAGAR">
+                        <option value="TAPI">
+                        <option value="VADODARA">
+                        <option value="VALSAD">
+                        <option value="AMBALA">
+                        <option value="BHIWANI">
+                        <option value="FARIDABAD">
+                        <option value="FATEHABAD">
+                        <option value="GURGAON">
+                        <option value="HISAR">
+                        <option value="JHAJJAR">
+                        <option value="JIND">
+                        <option value="KAITHAL">
+                        <option value="KARNAL">
+                        <option value="KURUKSHETRA">
+                        <option value="MAHENDRAGARH">
+                        <option value="MEWAT">
+                        <option value="PALWAL">
+                        <option value="PANCHKULA">
+                        <option value="PANIPAT">
+                        <option value="REWARI">
+                        <option value="ROHTAK">
+                        <option value="SIRSA">
+                        <option value="SONIPAT">
+                        <option value="YAMUNANAGAR">
+                        <option value="CHAMBA">
+                        <option value="HAMIRPUR">
+                        <option value="KANGRA">
+                        <option value="KINNAUR">
+                        <option value="KULLU">
+                        <option value="LAHUL AND SPITI">
+                        <option value="MANDI">
+                        <option value="SHIMLA">
+                        <option value="SIRMAUR">
+                        <option value="SOLAN">
+                        <option value="UNA">
+                        <option value="ANANTNAG">
+                        <option value="BADGAM">
+                        <option value="BANDIPORA">
+                        <option value="BARAMULLA">
+                        <option value="DODA">
+                        <option value="GANDERBAL">
+                        <option value="JAMMU">
+                        <option value="KARGIL">
+                        <option value="KATHUA">
+                        <option value="KISHTWAR">
+                        <option value="KULGAM">
+                        <option value="PULWAMA">
+                        <option value="RAJOURI">
+                        <option value="SAMBA">
+                        <option value="SHOPIAN">
+                        <option value="SRINAGAR">
+                        <option value="UDHAMPUR">
+                        <option value="BUDAUN">
+                        <option value="CHANDAULI">
+                        <option value="CHHATRAPUR">
+                        <option value="DEORIA">
+                        <option value="GORAKHPUR">
+                        <option value="HATHRAS">
+                        <option value="JALAUN">
+                        <option value="JAMUI">
+                        <option value="JHANSI">
+                        <option value="KANPUR">
+                        <option value="KUSHINAGAR">
+                        <option value="LALITPUR">
+                        <option value="MATHURA">
+                        <option value="MAURANIPUR">
+                        <option value="MEERUT">
+                        <option value="MORADABAD">
+                        <option value="MUMBAI">
+                        <option value="PANCHMAHAL">
+                        <option value="PUNJAB">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="Crop_Year">Crop Year</label>
+                    <input type="number" class="form-control" name="Crop_Year" step="any" placeholder="Enter crop year"
+                        required value="{{ request.form['Crop_Year'] if request.form.get('Crop_Year') else '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="Season">Season</label>
+                    <input type="text" class="form-control" name="Season" step="any" list="season-options"
+                        placeholder="Enter season name" required
+                        value="{{ request.form['Season'] if request.form.get('Season') else '' }}">
+                    <datalist id="season-options">
+                        <option value="Kharif">
+                        <option value="Whole Year">
+                        <option value="Autumn">
+                        <option value="Rabi">
+                        <option value="Summer">
+                        <option value="Winter">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="Crop">Crop</label>
+                    <input type="text" class="form-control" name="Crop" step="any" list="crop-options"
+                        placeholder="Enter crop name" required
+                        value="{{ request.form['Crop'] if request.form.get('Crop') else '' }}">
+                    <datalist id="crop-options">
+                        <option value="Arecanut">
+                        <option value="Other Kharif pulses">
+                        <option value="Rice">
+                        <option value="Banana">
+                        <option value="Cashewnut">
+                        <option value="Coconut">
+                        <option value="Dry ginger">
+                        <option value="Sugarcane">
+                        <option value="Sweet potato">
+                        <option value="Tapioca">
+                        <option value="Black pepper">
+                        <option value="Dry chillies">
+                        <option value="Other oilseeds">
+                        <option value="Turmeric">
+                        <option value="Maize">
+                        <option value="Moong(Green Gram)">
+                        <option value="Urad">
+                        <option value="Arhar/Tur">
+                        <option value="Groundnut">
+                        <option value="Sunflower">
+                        <option value="Bajra">
+                        <option value="Castor seed">
+                        <option value="Cotton(lint)">
+                        <option value="Horse-gram">
+                        <option value="Jowar">
+                        <option value="Korra">
+                        <option value="Ragi">
+                        <option value="Tobacco">
+                        <option value="Gram">
+                        <option value="Wheat">
+                        <option value="Masoor">
+                        <option value="Sesamum">
+                        <option value="Linseed">
+                        <option value="Safflower">
+                        <option value="Onion">
+                        <option value="Other misc. pulses">
+                        <option value="Samai">
+                        <option value="Small millets">
+                        <option value="Coriander">
+                        <option value="Potato">
+                        <option value="Other Rabi pulses">
+                        <option value="Soyabean">
+                        <option value="Beans & Mutter(Vegetable)">
+                        <option value="Bhindi">
+                        <option value="Brinjal">
+                        <option value="Citrus Fruit">
+                        <option value="Cucumber">
+                        <option value="Grapes">
+                        <option value="Mango">
+                        <option value="Orange">
+                        <option value="Other fibres">
+                        <option value="Other Fresh Fruits">
+                        <option value="Other Vegetables">
+                        <option value="Papaya">
+                        <option value="Pome Fruit">
+                        <option value="Tomato">
+                        <option value="Rapeseed & Mustard">
+                        <option value="Mesta">
+                        <option value="Cowpea(Lobia)">
+                        <option value="Lemon">
+                        <option value="Pomegranate">
+                        <option value="Sapota">
+                        <option value="Cabbage">
+                        <option value="Peas (vegetable)">
+                        <option value="Niger seed">
+                        <option value="Bottle Gourd">
+                        <option value="Sannhamp">
+                        <option value="Varagu">
+                        <option value="Garlic">
+                        <option value="Ginger">
+                        <option value="Oilseeds total">
+                        <option value="Pulses total">
+                        <option value="Jute">
+                        <option value="Peas & beans (Pulses)">
+                        <option value="Blackgram">
+                        <option value="Paddy">
+                        <option value="Pineapple">
+                        <option value="Barley">
+                        <option value="Khesari">
+                        <option value="Guar seed">
+                        <option value="Moth">
+                        <option value="Other Cereals & Millets">
+                        <option value="Cond-spcs other">
+                        <option value="Turnip">
+                        <option value="Carrot">
+                        <option value="Radish">
+                        <option value="Arecanut (Processed)">
+                        <option value="Arecanut (Raw)">
+                        <option value="Cashewnut Processed">
+                        <option value="Cashewnut Raw">
+                        <option value="Cardamom">
+                        <option value="Rubber">
+                        <option value="Bitter Gourd">
+                        <option value="Drum Stick">
+                        <option value="Jack Fruit">
+                        <option value="Snake Guard">
+                        <option value="Pumpkin">
+                        <option value="Tea">
+                        <option value="Coffee">
+                        <option value="Cauliflower">
+                        <option value="Other Citrus Fruit">
+                        <option value="Watermelon">
+                        <option value="Total foodgrain">
+                        <option value="Kapas">
+                        <option value="Colocosia">
+                        <option value="Lentil">
+                        <option value="Bean">
+                        <option value="Jobster">
+                        <option value="Perilla">
+                        <option value="Rajmash Kholar">
+                        <option value="Ricebean (nagadal)">
+                        <option value="Ash Gourd">
+                        <option value="Beet Root">
+                        <option value="Lab-Lab">
+                        <option value="Ribed Guard">
+                        <option value="Yam">
+                        <option value="Apple">
+                        <option value="Peach">
+                        <option value="Pear">
+                        <option value="Plums">
+                        <option value="Litchi">
+                        <option value="Ber">
+                        <option value="Other Dry Fruit">
+                        <option value="Jute & Mesta">
+                    </datalist>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="Area">Area</label>
+                    <input type="number" class="form-control" name="Area" step="any" placeholder="Enter area amount"
+                        required value="{{ request.form['Area'] if request.form.get('Area') else '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="Production">Production</label>
+                    <input type="number" class="form-control" name="Production" step="any"
+                        placeholder="Enter production amount" required
+                        value="{{ request.form['Production'] if request.form.get('Production') else '' }}">
+                </div>
+
+        </div>
+        <div id="submit-box">
+
+            <button type="submit" name="predictbutton">
+                Predict Now <span class="symbol">&#9679;</span>
+            </button>
+
+            {% if prediction %}
+            <h1 class="predicted-output"> Predicted Yield: <br> {{ prediction }}</h1>
+            {% endif %}
+
+        </div>
+
+        <img src="{{ url_for('static', filename='gallery/predict page.jpg') }}" alt="predict Page Image">
+    </div>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="{{ url_for('static', filename='js/predict_script.js') }}"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop Yield</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 class="text-center text-success">Crop Yield Prediction</h1>
+
+    <div class="container my-4 mt-4" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 20px; color:white">
+
+        <h1 class="text-center text-danger">Input your details</h1>
+
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="State_Name">State_Name</label>
+                <input type="text" class="form-control" name="State_Name" step="any">
+            </div>
+            <div class="form-group">
+                <label for="District_Name">District_Name</label>
+                <input type="text" class="form-control" name="District_Name" step="any">
+            </div>
+            <div class="form-group">
+                <label for="Crop_Year">Crop_Year</label>
+                <input type="number" class="form-control" name="Crop_Year" step="any">
+            </div>
+            <div class="form-group">
+                <label for="Season">Season</label>
+                <input type="text" class="form-control" name="Season" step="any">
+            </div>
+            <div class="form-group">
+                <label for="Crop">Crop</label>
+                <input type="text" class="form-control" name="Crop" step="any">
+            </div>
+            <div class="form-group">
+                <label for="Area">Area</label>
+                <input type="number" class="form-control" name="Area" step="any">
+            </div>
+            <div class="form-group">
+                <label for="Production">Production</label>
+                <input type="number" class="form-control" name="Production" step="any">
+            </div>
+            <button type="submit" class="btn btn-danger btn-lg mt-2 btn-block">Predict</button>
+        </form>
+
+
+        {% if prediction %}
+        <h1 class="text-center"> Predicted Yield: <br>{{ prediction }}</h1>
+        {% endif %}
+    </div>
+
+
+
+</body>
+
+</html> -->

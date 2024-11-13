@@ -24,6 +24,11 @@ model_columns = pickle.load(open("model_columns.pkl", "rb"))
 def Home():
     return render_template("index.html")
 
+# Route to the prediction page
+@flask_app.route("/predict_page")
+def predict_page():
+    return render_template("predict.html")
+
 @flask_app.route("/predict", methods=["POST"])
 def predict():
     try:
@@ -60,7 +65,7 @@ def predict():
     prediction = model.predict(dummy_df)
 
     # Return the result to the template (e.g., index.html)
-    return render_template("index.html", prediction=prediction[0])
+    return render_template("predict.html", prediction=prediction[0])
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
